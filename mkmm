@@ -83,6 +83,7 @@ __save() {
 
   if ! [[ -e "$_dest" ]] || [[ -n "$_force" ]]; then
     __remove "$_dest"
+    mkdir -p "$_dest"
     cp --archive --link $_force -- \
      "/usr/lib/modules/$1/." "$_dest"
     _ret=$?
