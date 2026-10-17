@@ -188,6 +188,11 @@ __bleach() {
   done < <(find /usr/lib/modules -mindepth 1 -maxdepth 1 -type d)
   # Clean our directory. Anything inside can be removed because we checked that
   # /usr/lib/modules/$(uname -r) still exists
+  if [ \! -d "/usr/lib/${_myname}" ]; then
+    echo WARNING: no /usr/lib/${_myname} detected, have you ever run ${_myname} save\?
+    exit 0
+  fi
+
   while IFS='' read -r _moddir; do
     __remove "$_moddir"
     ((_ret+=$?))
